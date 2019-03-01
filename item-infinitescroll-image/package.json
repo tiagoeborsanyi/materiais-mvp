@@ -1,0 +1,28 @@
+{
+  "name": "item-infinitescroll-image",
+  "version": "1.0.0",
+  "description": "mini aplicação de cadastro de itens com scroll infinito e upload de imagens",
+  "main": "server.js",
+  "scripts": {
+    "server": "nodemon server.js",
+    "client-install": "npm install --prefix client",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "keywords": [
+    "nodejs",
+    "mongodb",
+    "express"
+  ],
+  "author": "Tiago Emerick",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "concurrently": "^4.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "express-fileupload": "^1.1.1-alpha.3",
+    "mongoose": "^5.4.13",
+    "validator": "^10.11.0"
+  }
+}

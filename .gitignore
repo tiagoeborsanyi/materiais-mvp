@@ -1,0 +1,7 @@
+./item-infinitescroll-image/node_modules
+./item-infinitescroll-image/package-log.json
+./item-infinitescroll-image/client/package-log.json
+./item-infinitescroll-image/client/node_modules
+./item-infinitescroll-image/client/yarn.lock
+package-log.json
+.env

@@ -1,0 +1,15 @@
+.InputElement {
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 2px solid blue;
+}
+
+.InputElement:focus {
+    outline: none;
+}
+
+.Invalid {
+    border-bottom: 1px solid red;
+    background: #ddd;
+}

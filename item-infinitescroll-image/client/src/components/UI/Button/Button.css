@@ -1,0 +1,25 @@
+.Button {
+    margin-bottom: 45px;
+    width: 89px;
+    height: 40px;
+    background: green;
+    color: white;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 2px 3px #ccc;
+}
+
+.Button:hover {
+    cursor: pointer;
+    background: white;
+    color: green;
+    font-weight: bold;
+    border: 1px solid green;
+}
+
+.Button:disabled {
+    color: #ccc;
+    cursor: not-allowed;
+}
+

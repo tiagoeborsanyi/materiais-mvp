@@ -1,0 +1,84 @@
+.Titulo {
+  width: 25%;
+  margin: auto;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+}
+
+.image {
+    display: inline-block;
+    width: 40%;
+    margin: 40px auto;
+}
+
+.image__item {
+    height: 225px;
+    width: 225px;
+    display: block;
+    margin: auto;
+}
+
+.image__wrapperButton {
+    position: relative;
+    margin: auto;
+    overflow: hidden;
+    display: flex;
+  }
+  
+  .image__btn {
+    border: 2px solid gray;
+    color: gray;
+    background-color: white;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: bold;
+    margin: auto;
+  }
+  
+  .image__inputButton {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+  }
+
+  .content {
+    display: inline-block;
+    width: 60%;
+    position: absolute;
+    margin-top: 46px;
+}
+
+.content span {
+    font-weight: bold;
+}
+
+.content input[type=text],
+.content input[type=number],
+.content textarea {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0px 42px 0;;
+    box-sizing: border-box;
+  }
+
+.content-form__button {
+    margin-bottom: 45px;
+    width: 89px;
+    height: 40px;
+    background: green;
+    color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 2px 3px #ccc;
+}
+
+.content-form__button:hover {
+    cursor: pointer;
+    background: white;
+    color: green;
+    font-weight: bold;
+    border: 1px solid green;
+}
