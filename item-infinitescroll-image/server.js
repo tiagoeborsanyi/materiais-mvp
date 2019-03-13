@@ -8,6 +8,8 @@ const item = require('./routes/item');
 
 const app = express();
 
+require('dotenv').config();
+
 app.use('*', cors());
 
 // default options

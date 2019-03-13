@@ -1,4 +1,6 @@
+require('dotenv').config();
+
 module.exports = {
-    mongoURI: `mongodb://${proccess.env.USER_BD}:${proccess.env.PASS_BD}@${proccess.env.PATH_BD}/${proccess.env.NAME_BD}`,
+    mongoURI: process.env.MONGO_PATH,
     secretOrKey: proccess.env.SECRET
 }
