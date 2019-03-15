@@ -27,25 +27,26 @@ router.get('/', (req, res) => {
 // @route   GET api/item/upload
 // @desc    Get items files
 // @access  Public
-router.post('/upload', function(req, res) {
+router.post('/upload', (req, res) => {
   if (Object.keys(req.files).length == 0) {
     return res.status(400).send('No files were uploaded.');
   }
-  console.log('files: ', req.files);
+  console.log('files: ', __dirname);
   let uploadFile = req.files.file;
   const fileName = req.files.file.name;
-  const local = proccess.env.PATH_FILE;
+  const local = '/home/tiago/Documentos/Projetos/materiais-mvp/item-infinitescroll-image/client/src/assests/';
   uploadFile.mv(
     `${local}${fileName}`,
     function (err) {
-      if (err) res.status(500).json(err);
+      if (err) {
+        console.log(err);
+        return res.status(500).json(err);
+      }
 
       res.json({
-        file: local+req.files.file.name,
         name: fileName
-      })
-    }
-  )
+      });
+    });
 });
 
 // @route   POST api/item

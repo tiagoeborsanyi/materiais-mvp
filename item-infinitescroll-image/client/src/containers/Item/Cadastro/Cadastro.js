@@ -131,10 +131,14 @@ class Cadastro extends Component {
     }
 
     uploadImagem = (file, name, callback) => {
-        console.log('uploadimagem');
         const data = new FormData();
         data.append('file', file, name);
-        axios.post('/api/item/upload', data)
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        };
+        axios.post('/api/item/upload', data, config)
             .then(res => {
                 return callback(res);
             })
@@ -143,7 +147,6 @@ class Cadastro extends Component {
 
     selecionaImagem = (event) => {
         event.preventDefault();
-        //this.uploadImagem(event.target.files[0], event.target.files[0].name);
         let reader = new FileReader();
         let file = event.target.files[0];
 
@@ -161,12 +164,14 @@ class Cadastro extends Component {
         event.preventDefault();
         this.setState({loading: true});
         const {fileUpload} = this.state;
+        console.log(fileUpload);
         this.uploadImagem(fileUpload, fileUpload.name, res => {
             let tempForm = {};
             for (let key in this.state.cadastroForm) {
                 tempForm[key] = this.state.cadastroForm[key].value;
             }
-            tempForm.imagem = res.data.name;   
+            tempForm.imagem = res.fileName;
+            console.log(tempForm);   
             axios.post('/api/item', tempForm)
             .then(response => {
                 this.setState({loading: false});
@@ -249,8 +254,8 @@ class Cadastro extends Component {
                 {imagemselecionada}
                 <div className={classes.image__wrapperButton}>
                 
-                    <button className={classes.image__btn} onClick={this.uploadImagem}>Selecione uma imagem</button>
-                    <input className={classes.image__inputButton} onChange={this.selecionaImagem} name="file" type="file" accept="image/png, image/jpeg" />
+                    <button className={classes.image__btn}>Selecione uma imagem</button>
+                    <input className={classes.image__inputButton} onChange={this.selecionaImagem} name="" type="file" accept="image/png, image/jpeg" />
                 
                 </div>
             </div>
