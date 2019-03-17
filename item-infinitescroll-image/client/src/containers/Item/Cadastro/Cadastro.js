@@ -199,25 +199,44 @@ class Cadastro extends Component {
         event.preventDefault();
         this.setState({loading: true});
         const {fileUpload} = this.state;
-        // console.log(fileUpload);
-        this.uploadImagem(fileUpload, fileUpload.name, res => {
-            let tempForm = {};
-            for (let key in this.state.cadastroForm) {
-                tempForm[key] = this.state.cadastroForm[key].value;
-            }
-            // console.log(res);
-            tempForm.imagem = res.data.name;
-            // console.log(tempForm);   
-            axios.post('/api/item', tempForm)
-            .then(response => {
-                this.setState({loading: false});
-                this.props.history.push('/');
-            })
-            .catch(err => {
-                this.setState({loading: false});
-                console.log(err);
-            }); 
-         });
+        if (fileUpload) {
+            this.uploadImagem(fileUpload, fileUpload.name, res => {
+                let tempForm = {};
+                for (let key in this.state.cadastroForm) {
+                    tempForm[key] = this.state.cadastroForm[key].value;
+                }
+                tempForm.imagem = res.data.imagem;
+                tempForm._id = this.props.location.hash.slice(1);
+                // console.log(tempForm);   
+                axios.post('/api/item', tempForm)
+                .then(response => {
+                    this.setState({loading: false});
+                    this.props.history.push('/');
+                })
+                .catch(err => {
+                    this.setState({loading: false});
+                    console.log(err);
+                }); 
+             });
+        }
+        let tempForm = {};
+        for (let key in this.state.cadastroForm) {
+            tempForm[key] = this.state.cadastroForm[key].value;
+        }
+        tempForm.imagem = this.state.imagem;
+        tempForm._id = this.props.location.hash.slice(1);
+        // console.log(tempForm);   
+        axios.post('/api/item', tempForm)
+        .then(response => {
+            console.log('response')
+            this.setState({loading: false});
+            this.props.history.push('/');
+        })
+        .catch(err => {
+            this.setState({loading: false});
+            console.log(err);
+        }); 
+        
     }
 
     checkFormValid(value, regras) {
