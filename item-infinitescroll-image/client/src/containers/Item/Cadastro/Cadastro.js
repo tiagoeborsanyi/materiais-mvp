@@ -130,6 +130,14 @@ class Cadastro extends Component {
         loading: false
     }
 
+    componentWillMount() {
+        console.log('Cadastro willMount');
+    }
+
+    componentDidMount() {
+        console.log('Cadastro didMount');
+    }
+
     uploadImagem = (file, name, callback) => {
         const data = new FormData();
         data.append('file', file, name);

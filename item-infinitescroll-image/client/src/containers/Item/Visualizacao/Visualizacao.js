@@ -1,11 +1,12 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import classes from './Visualizacao.css';
 
 class Visualizacao extends Component {
   render() {
       console.log(this.props);
-      const id = this.props.location.hash.slice(1)
+      const id = this.props.location.hash.slice(1);
     return (
       <div className={classes.Container}>
         <div className={classes.image}>
@@ -20,7 +21,10 @@ class Visualizacao extends Component {
         <div className={classes.content}>
             <div className={classes.content__botao}>
                 <a href="#">Alterar Estoque</a>
-                <a href="#">Editar</a>
+                <Link to={{
+                  pathname: "/cadastro",
+                  hash: this.props.location.hash
+                }}>Editar</Link>
                 <a href="#">Excluir</a>
             </div>
             <p><span>Nome: </span>Conjunto Interruptor Simples</p>
