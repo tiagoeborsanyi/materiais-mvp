@@ -195,40 +195,16 @@ class Cadastro extends Component {
         this.setState({fileUpload: event.target.files[0]});
     }
 
-    cadastraItem = (event) => {
-        event.preventDefault();
-        this.setState({loading: true});
-        const {fileUpload} = this.state;
-        if (fileUpload) {
-            this.uploadImagem(fileUpload, fileUpload.name, res => {
-                let tempForm = {};
-                for (let key in this.state.cadastroForm) {
-                    tempForm[key] = this.state.cadastroForm[key].value;
-                }
-                tempForm.imagem = res.data.imagem;
-                tempForm._id = this.props.location.hash.slice(1);
-                // console.log(tempForm);   
-                axios.post('/api/item', tempForm)
-                .then(response => {
-                    this.setState({loading: false});
-                    this.props.history.push('/');
-                })
-                .catch(err => {
-                    this.setState({loading: false});
-                    console.log(err);
-                }); 
-             });
-        }
+    middleCadastraItem = (imagem, id) => {
         let tempForm = {};
         for (let key in this.state.cadastroForm) {
             tempForm[key] = this.state.cadastroForm[key].value;
         }
-        tempForm.imagem = this.state.imagem;
-        tempForm._id = this.props.location.hash.slice(1);
-        // console.log(tempForm);   
+        tempForm.imagem = imagem;
+        tempForm._id = id;
+        console.log(tempForm);   
         axios.post('/api/item', tempForm)
         .then(response => {
-            console.log('response')
             this.setState({loading: false});
             this.props.history.push('/');
         })
@@ -236,7 +212,22 @@ class Cadastro extends Component {
             this.setState({loading: false});
             console.log(err);
         }); 
-        
+    }
+
+    cadastraItem = (event) => {
+        event.preventDefault();
+        this.setState({loading: true});
+        const {fileUpload} = this.state;
+        const id = this.props.location.hash.slice(1);
+        console.log(this.state.image)
+        if (fileUpload) {
+            this.uploadImagem(fileUpload, fileUpload.name, res => {
+                console.log(res);
+                this.middleCadastraItem(res.data.name, id)
+            });
+        } else {
+            this.middleCadastraItem(this.state.imagem, id)
+        } 
     }
 
     checkFormValid(value, regras) {
