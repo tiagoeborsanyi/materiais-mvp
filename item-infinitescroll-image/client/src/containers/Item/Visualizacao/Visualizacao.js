@@ -22,7 +22,7 @@ class Visualizacao extends Component {
             <div className={classes.content__botao}>
                 <a href="#">Alterar Estoque</a>
                 <Link to={{
-                  pathname: "/cadastro",
+                  pathname: "/edita",
                   hash: this.props.location.hash
                 }}>Editar</Link>
                 <a href="#">Excluir</a>

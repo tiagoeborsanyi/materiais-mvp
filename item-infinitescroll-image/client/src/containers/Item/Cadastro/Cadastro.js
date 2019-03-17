@@ -132,9 +132,25 @@ class Cadastro extends Component {
         loading: false
     }
 
+    componentWillReceiveProps() {
+        console.log(this.props);
+        const updateFormItem = {
+            ...this.state.cadastroForm
+        }
+        for (let item in updateFormItem) {
+            updateFormItem[item].value = '';
+        }
+        this.setState({
+            imagem: '',
+            formInputValue: null,
+            cadastroForm: updateFormItem
+        })
+    }
+
     componentDidMount() {
-        console.log('Cadastro didMount');
+        // console.log('Cadastro didMount');
         const id = this.props.location.hash.slice(1);
+        //console.log(id);
         if (id) {
             axios.get(`/api/item/${id}`).then(res => {
                 // console.log(res.data);
@@ -214,7 +230,7 @@ class Cadastro extends Component {
     }
 
     inputChangeItem = (event, inputItem) => {
-        console.log(inputItem)
+        // console.log(inputItem)
         const updateFormItem = {
             ...this.state.cadastroForm
         }
@@ -234,6 +250,10 @@ class Cadastro extends Component {
         this.setState({cadastroForm: updateFormItem, formIsValid: formIsValid});
     }
 
+    changeStateEdit = () => {
+        this.setState({formInputValue: null, formIsValid: true});
+    }
+
     render() {
         const cadastroFormArray = [];
         for (let key in this.state.cadastroForm) {
@@ -243,13 +263,14 @@ class Cadastro extends Component {
             });
         }
         if (this.state.formInputValue) {
-            cadastroFormArray.map(cadForm => {
-                console.log(cadForm.config.value);
-                cadForm.config.value = this.state.formInputValue[0][1]
+            const arr = cadastroFormArray;
+            arr.map((cadForm, index) => {
+                cadForm.config.value = this.state.formInputValue[index][1]
+                cadForm.config.valid = true;
             });
+            // Não poderia user esse setState por conta do estado do componente, gambi feia essa. BUGFIX
+            this.changeStateEdit();
         }
-        console.log(cadastroFormArray);
-        console.log(this.state.formInputValue);
         let form = (
             <form onSubmit={this.cadastraItem}>
                 {cadastroFormArray.map(formElement => (

@@ -13,6 +13,7 @@ class App extends Component {
         <Layout>
           <Switch>
             <Route path="/cadastro" component={Cadastro} />
+            <Route path="/edita" component={Cadastro} />
             <Route path="/visualiza-item" component={Visualiza} />
             <Route path="/" exact component={Dashboard} />
           </Switch>

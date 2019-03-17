@@ -13,7 +13,7 @@ const navigationItems = () => (
             <span>Cadastrar</span>
             <ul>
                 <li>
-                    <NavLink to="/cadastro">Item</NavLink>
+                    <NavLink exact to="/cadastro">Item</NavLink>
                 </li>
             </ul>
         </li>
