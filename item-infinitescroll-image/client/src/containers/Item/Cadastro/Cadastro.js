@@ -164,14 +164,15 @@ class Cadastro extends Component {
         event.preventDefault();
         this.setState({loading: true});
         const {fileUpload} = this.state;
-        console.log(fileUpload);
+        // console.log(fileUpload);
         this.uploadImagem(fileUpload, fileUpload.name, res => {
             let tempForm = {};
             for (let key in this.state.cadastroForm) {
                 tempForm[key] = this.state.cadastroForm[key].value;
             }
-            tempForm.imagem = res.fileName;
-            console.log(tempForm);   
+            // console.log(res);
+            tempForm.imagem = res.data.name;
+            // console.log(tempForm);   
             axios.post('/api/item', tempForm)
             .then(response => {
                 this.setState({loading: false});
