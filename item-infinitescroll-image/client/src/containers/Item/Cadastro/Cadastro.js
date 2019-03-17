@@ -11,6 +11,7 @@ class Cadastro extends Component {
     state = {
         selectedfile: '',
         imagePreviewURL: '',
+        imagem: '',
         fileUpload: null,
         loaded: 0,
         cadastroForm: {
@@ -126,16 +127,25 @@ class Cadastro extends Component {
                 touched: false
             }
         },
+        formInputValue: null,
         formIsValid: false,
         loading: false
     }
 
-    componentWillMount() {
-        console.log('Cadastro willMount');
-    }
-
     componentDidMount() {
         console.log('Cadastro didMount');
+        const id = this.props.location.hash.slice(1);
+        if (id) {
+            axios.get(`/api/item/${id}`).then(res => {
+                // console.log(res.data);
+                this.setState({
+                    imagem: res.data.imagem
+                });
+                let temp = Object.entries(res.data);
+                temp.shift();
+                this.setState({formInputValue: temp});
+            });
+        }
     }
 
     uploadImagem = (file, name, callback) => {
@@ -161,7 +171,8 @@ class Cadastro extends Component {
         reader.onloadend = () => {
             this.setState({
                 selectedfile: file,
-                imagePreviewURL: reader.result
+                imagePreviewURL: reader.result,
+                imagem: null
             })
         }
         reader.readAsDataURL(file);
@@ -203,6 +214,7 @@ class Cadastro extends Component {
     }
 
     inputChangeItem = (event, inputItem) => {
+        console.log(inputItem)
         const updateFormItem = {
             ...this.state.cadastroForm
         }
@@ -230,6 +242,14 @@ class Cadastro extends Component {
                 config: this.state.cadastroForm[key]
             });
         }
+        if (this.state.formInputValue) {
+            cadastroFormArray.map(cadForm => {
+                console.log(cadForm.config.value);
+                cadForm.config.value = this.state.formInputValue[0][1]
+            });
+        }
+        console.log(cadastroFormArray);
+        console.log(this.state.formInputValue);
         let form = (
             <form onSubmit={this.cadastraItem}>
                 {cadastroFormArray.map(formElement => (
@@ -251,10 +271,12 @@ class Cadastro extends Component {
             form = <Spinner />;
         }
         let imagemselecionada = null;
+        // console.log(this.state.imagem);
         if (this.state.imagePreviewURL) {
             imagemselecionada = (<img src={this.state.imagePreviewURL} alt="Interruptor de luz" className={classes.image__item} />)
-        } else {
-            imagemselecionada = (<img src={require('../../../assests/images/no-photo.png')} alt="Interruptor de luz" className={classes.image__item} />)
+        }else {
+            // console.log('else imagem');
+            imagemselecionada = (<img src={this.state.imagem ? require(`../../../assests/${this.state.imagem}`) : require('../../../assests/images/no-photo.png')} alt="Interruptor de luz" className={classes.image__item} />)
         }
         return (
             <div className={classes.Container}>

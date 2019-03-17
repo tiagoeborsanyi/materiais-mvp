@@ -14,7 +14,7 @@ class Dashboard extends Component {
   componentDidMount () {
     axios.get('/api/item')
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         this.setState({dash: res.data});
       })
       .catch(err => console.log(err));
