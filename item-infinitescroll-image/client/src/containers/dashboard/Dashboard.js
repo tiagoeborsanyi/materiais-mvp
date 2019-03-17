@@ -3,6 +3,7 @@ import axios from '../../axios-order';
 
 import Aux from '../../hoc/Aux/Aux';
 import DashboardItems from './DashboardItems/DashboardItems';
+import classes from './Dashboard.css'
 
 class Dashboard extends Component {
   state = {
@@ -22,6 +23,7 @@ class Dashboard extends Component {
   render() { 
     return (
       <Aux>
+        <div className={classes.Dashboard}>
         {
           this.state.dash.map(item => (
             <DashboardItems
@@ -36,6 +38,7 @@ class Dashboard extends Component {
               imagem={item.imagem ? item.imagem : this.state.noPhoto} />
           ))
         }
+        </div>
       </Aux>
     )
   }

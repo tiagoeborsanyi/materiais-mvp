@@ -249,7 +249,7 @@ class Cadastro extends Component {
             imagemselecionada = (<img src={require('../../../assests/images/no-photo.png')} alt="Interruptor de luz" className={classes.image__item} />)
         }
         return (
-            <div>
+            <div className={classes.Container}>
                 <h4 className={classes.Titulo}>Cadastro de Items</h4>
             <div className={classes.image}> 
                 {imagemselecionada}

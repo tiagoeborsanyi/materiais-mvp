@@ -8,7 +8,7 @@ class DashboardItems extends Component {
         const espec = this.props.especificacao ? (<p><strong>Especificações:</strong> {this.props.especificacao} - pacote {this.props.packunit} unidades</p>) : '';
         const stock = this.props.stock ? (<p><strong>Qtd. Estoque:</strong> {this.props.stock} itens</p>) : '';
         const brand = (this.props.marca+' - ') ? this.props.marca : '';
-        console.log(typeof this.props.imagem);
+        // console.log(typeof this.props.imagem);
         return (
             <div>
                 <section>

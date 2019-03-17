@@ -1,0 +1,62 @@
+.Container {
+    margin-top: 20px;
+}
+
+.image {
+    display: inline-block;
+    width: 40%;
+    margin: 40px auto;
+}
+
+.image__item {
+    display: block;
+    margin: auto;
+}
+
+.image__text {
+    display: block;
+    text-align: center;
+    margin: auto;
+}
+
+.content {
+    display: inline-block;
+    width: 60%;
+    position: absolute;
+    margin-top: 45px;
+}
+
+.content__botao {
+    text-align: right;
+    margin-right: 30px;
+    margin-bottom: 80px;
+}
+
+.content__botao a {
+    margin: 0 13px;
+    text-decoration: none;
+    background: green;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.content__botao a:hover {
+    color: green;
+    background: white;
+    border: 1px solid green;
+}
+
+.content p {
+    text-align: justify;
+    padding-right: 16px;
+}
+
+.content span {
+    font-weight: bold;
+}
+
+.item__texto p {
+    display: inline;
+    margin-right: 16px;
+}
