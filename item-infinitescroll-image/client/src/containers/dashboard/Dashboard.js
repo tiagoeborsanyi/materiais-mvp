@@ -26,6 +26,7 @@ class Dashboard extends Component {
           this.state.dash.map(item => (
             <DashboardItems
               key={item._id}
+              id={item._id}
               nome={item.name}
               marca={item.brand}
               codref={item.codrefproduct}

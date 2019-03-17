@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import classes from './DashboardItems.css';
 
@@ -23,10 +23,13 @@ class DashboardItems extends Component {
                                 {stock}
                             </div>
                             <div className={classes.containerDashItem__info}>
-                                <NavLink to="/">
+                                <Link to={{
+                                    pathname: "/visualiza-item",
+                                    hash: "#"+this.props.id
+                                }}>
                                     <img src={require('../../../assests/images/button-plus.png')} alt="" />
                                     <p>mais informação</p>
-                                </NavLink>
+                                </Link>
                             </div>
                         </div>
                     </div>
