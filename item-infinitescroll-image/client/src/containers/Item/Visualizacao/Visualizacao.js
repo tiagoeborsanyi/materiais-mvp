@@ -1,12 +1,25 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import axios from '../../../axios-order';
 
 import classes from './Visualizacao.css';
 
 class Visualizacao extends Component {
+
+    deleteItem = (id) => {
+        axios.delete(`/api/item/${id}`)
+            .then(res => {
+                console.log(res);
+                if (res.data.success) {
+                    this.props.history.push('/');
+                }
+            })
+            .catch(err => console.log(err));
+    }
+
   render() {
-      console.log(this.props);
-      // const id = this.props.location.hash.slice(1);
+      // console.log(this.props);
+      const id = this.props.location.hash.slice(1);
     return (
       <div className={classes.Container}>
         <div className={classes.image}>
@@ -25,7 +38,7 @@ class Visualizacao extends Component {
                   pathname: "/edita",
                   hash: this.props.location.hash
                 }}>Editar</Link>
-                <button>Excluir</button>
+                <button onClick={() => this.deleteItem(id)}>Excluir</button>
             </div>
             <p><span>Nome: </span>Conjunto Interruptor Simples</p>
             <div className={classes.item__texto}>
