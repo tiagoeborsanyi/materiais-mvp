@@ -32,7 +32,8 @@
     margin-bottom: 80px;
 }
 
-.content__botao a {
+.content__botao a,
+.content__botao button {
     margin: 0 13px;
     text-decoration: none;
     background: green;
@@ -41,10 +42,12 @@
     border-radius: 10px;
 }
 
-.content__botao a:hover {
+.content__botao a:hover,
+.content__botao button:hover {
     color: green;
     background: white;
     border: 1px solid green;
+    cursor: pointer;
 }
 
 .content p {

@@ -6,7 +6,7 @@ import classes from './Visualizacao.css';
 class Visualizacao extends Component {
   render() {
       console.log(this.props);
-      const id = this.props.location.hash.slice(1);
+      // const id = this.props.location.hash.slice(1);
     return (
       <div className={classes.Container}>
         <div className={classes.image}>
@@ -25,7 +25,7 @@ class Visualizacao extends Component {
                   pathname: "/edita",
                   hash: this.props.location.hash
                 }}>Editar</Link>
-                <a href="#">Excluir</a>
+                <button>Excluir</button>
             </div>
             <p><span>Nome: </span>Conjunto Interruptor Simples</p>
             <div className={classes.item__texto}>
