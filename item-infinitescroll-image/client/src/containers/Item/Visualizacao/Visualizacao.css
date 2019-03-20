@@ -11,6 +11,9 @@
 .image__item {
     display: block;
     margin: auto;
+    background: transparent;
+    height: 210px;
+    width: 210px;
 }
 
 .image__text {
