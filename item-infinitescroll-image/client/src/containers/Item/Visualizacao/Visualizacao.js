@@ -27,13 +27,13 @@ class Visualizacao extends Component {
             <div className={classes.image__text}>
                 <p>Qtd. Estoque</p>
                 <p>1080</p>
-                <p><a href="#">Historico Estoque</a></p>
-                <p><a href="#">Historico Guias</a></p>
+                <p><Link to="/">Historico Estoque</Link></p>
+                <p><Link to="/">Historico Guias</Link></p>
             </div>
         </div>
         <div className={classes.content}>
             <div className={classes.content__botao}>
-                <a href="#">Alterar Estoque</a>
+                <button>Alterar Estoque</button>
                 <Link to={{
                   pathname: "/edita",
                   hash: this.props.location.hash
