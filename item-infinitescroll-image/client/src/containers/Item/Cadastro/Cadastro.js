@@ -164,6 +164,25 @@ class Cadastro extends Component {
         }
     }
 
+    componentDidUpdate() {
+        console.log('update');
+        if (this.state.formInputValue) {
+            const arr = [];
+            for (let key in this.state.cadastroForm) {
+                arr.push({
+                    id: key,
+                    config: this.state.cadastroForm[key]
+                });
+            }
+            arr.map((cadForm, index) => {
+                cadForm.config.value = this.state.formInputValue[index][1]
+                cadForm.config.valid = true;
+            });
+            // Não poderia user esse setState por conta do estado do componente, gambi feia essa. BUGFIX
+            this.changeStateEdit();
+        }
+    }
+
     uploadImagem = (file, name, callback) => {
         const data = new FormData();
         data.append('file', file, name);
@@ -271,15 +290,6 @@ class Cadastro extends Component {
                 id: key,
                 config: this.state.cadastroForm[key]
             });
-        }
-        if (this.state.formInputValue) {
-            const arr = cadastroFormArray;
-            arr.map((cadForm, index) => {
-                cadForm.config.value = this.state.formInputValue[index][1]
-                cadForm.config.valid = true;
-            });
-            // Não poderia user esse setState por conta do estado do componente, gambi feia essa. BUGFIX
-            this.changeStateEdit();
         }
         let form = (
             <form onSubmit={this.cadastraItem}>
