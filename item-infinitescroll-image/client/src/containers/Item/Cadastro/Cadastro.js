@@ -165,7 +165,11 @@ class Cadastro extends Component {
     }
 
     componentDidUpdate() {
-        console.log('update');
+        // O erro que esta dando é porque nem sempre os nomes das propriedades vem na ordem correta
+        // então acontece uma bagunça na hora que é feito o update e atualizado os inputs
+        // para facilitar o objeto de input poderia conter uma propriedade com o valor de inputName
+        // para bater com o mesmo valor da propriedade e assim ṕoder atualizar os inputs de uma forma correta
+        // console.log('update', this.state.cadastroForm);
         if (this.state.formInputValue) {
             const arr = [];
             for (let key in this.state.cadastroForm) {
@@ -175,10 +179,14 @@ class Cadastro extends Component {
                 });
             }
             arr.map((cadForm, index) => {
+                // console.log(index, this.state.formInputValue, cadForm.config);
                 cadForm.config.value = this.state.formInputValue[index][1]
                 cadForm.config.valid = true;
             });
-            // Não poderia user esse setState por conta do estado do componente, gambi feia essa. BUGFIX
+            // Agora a gambi foi arrumada, o estado esta sendo atualizado no update do componente
+            // Mas o bom mesmo seria usar redux para poder controlar o estado do componente de uma forma
+            // melhor e mais organizado, tendo assim bem mais controle sobre o ciclo de vida do componente
+            // e o estado que ele se encontra.
             this.changeStateEdit();
         }
     }
@@ -216,12 +224,13 @@ class Cadastro extends Component {
 
     middleCadastraItem = (imagem, id) => {
         let tempForm = {};
+        // console.log(this.state.cadastroForm);
         for (let key in this.state.cadastroForm) {
             tempForm[key] = this.state.cadastroForm[key].value;
         }
         tempForm.imagem = imagem;
         tempForm._id = id;
-        console.log(tempForm);   
+        // console.log(tempForm);   
         axios.post('/api/item', tempForm)
         .then(response => {
             this.setState({loading: false});
@@ -259,7 +268,7 @@ class Cadastro extends Component {
     }
 
     inputChangeItem = (event, inputItem) => {
-        // console.log(inputItem)
+         console.log(inputItem, event.target.value);
         const updateFormItem = {
             ...this.state.cadastroForm
         }
