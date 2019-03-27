@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from '../../axios-order';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 import Aux from '../../hoc/Aux/Aux';
 import DashboardItems from './DashboardItems/DashboardItems';

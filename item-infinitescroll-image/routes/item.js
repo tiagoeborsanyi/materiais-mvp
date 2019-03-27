@@ -20,6 +20,8 @@ router.get('/test', (req, res) => res.json({ msg: 'API Item Works' }));
 router.get('/', (req, res) => {
     Item.find()
         .sort({ date: -1 })
+        .skip(+req.query.start)
+        .limit(+req.query.count)
         .then(items => res.json(items))
         .catch(err => res.status(404).json({ noitemsfound: 'No items found' }));
 });
