@@ -26,7 +26,7 @@ class Dashboard extends Component {
 
   fetchItens = () => {
     const { count, start } = this.state;
-    this.setState({start: count+start});
+    this.setState({start: count + this.state.start});
     axios.get(`/api/item?start=${start}&count=${count}`)
       .then(res => {
         this.setState({dash: this.state.dash.concat(res.data)});
@@ -38,8 +38,13 @@ class Dashboard extends Component {
     return (
       <Aux>
         <div className={classes.Dashboard}>
-        {
-          this.state.dash.map(item => (
+        <InfiniteScroll
+          dataLength={this.state.dash.length}
+          next={this.fetchItens}
+          hasMore={true}
+          loader={<h4>Loading...</h4>}
+        >
+          {this.state.dash.map(item => (
             <DashboardItems
               key={item._id}
               id={item._id}
@@ -50,8 +55,8 @@ class Dashboard extends Component {
               packunit={item.qtdpacking}
               stock={item.qtdestock}
               imagem={item.imagem ? item.imagem : this.state.noPhoto} />
-          ))
-        }
+          ))}
+        </InfiniteScroll>
         </div>
       </Aux>
     )
