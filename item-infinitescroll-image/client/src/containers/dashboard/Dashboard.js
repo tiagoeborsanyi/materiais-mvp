@@ -9,14 +9,27 @@ import classes from './Dashboard.css'
 class Dashboard extends Component {
   state = {
     dash: [],
+    count: 3,
+    start: 0,
     noPhoto: 'images/no-photo.png'
   }
 
   componentDidMount () {
-    axios.get('/api/item')
+    const { count, start } = this.state;
+    axios.get(`/api/item?start=${start}&count=${count}`)
       .then(res => {
         // console.log(res.data);
         this.setState({dash: res.data});
+      })
+      .catch(err => console.log(err));
+  }
+
+  fetchItens = () => {
+    const { count, start } = this.state;
+    this.setState({start: count+start});
+    axios.get(`/api/item?start=${start}&count=${count}`)
+      .then(res => {
+        this.setState({dash: this.state.dash.concat(res.data)});
       })
       .catch(err => console.log(err));
   }
