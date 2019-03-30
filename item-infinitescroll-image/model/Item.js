@@ -9,13 +9,10 @@ const ItemSchema = new Schema({
       type: String,
       required: true
     },
-    imagem: {
+    brand: {
         type: String
     },
     model: {
-        type: String
-    },
-    brand: {
         type: String
     },
     specification: {
@@ -30,14 +27,17 @@ const ItemSchema = new Schema({
     qtdpacking: {
         type: String
     },
-    qtdestock: {
-        type: Number
-    },
     descrition: {
         type: String
     },
     observation: {
         type: String
+    },
+    imagem: {
+        type: String
+    },
+    qtdestock: {
+        type: Number
     },
     date: {
       type: Date,

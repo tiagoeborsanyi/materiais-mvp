@@ -17,6 +17,7 @@ class Cadastro extends Component {
         cadastroForm: {
             nome: {
                 elementType: 'input',
+                label: 'name',
                 elementConfig: {
                     type: 'text',
                     placeholder: 'Nome Produto'
@@ -30,6 +31,7 @@ class Cadastro extends Component {
             },
             marca: {
                 elementType: 'input',
+                label: 'brand',
                 elementConfig: {
                     type: 'text',
                     placeholder: 'Marca Produto'
@@ -43,6 +45,7 @@ class Cadastro extends Component {
             },
             modelo: {
                 elementType: 'input',
+                label: 'model',
                 elementConfig: {
                     type: 'text',
                     placeholder: 'Modelo Produto'
@@ -56,6 +59,7 @@ class Cadastro extends Component {
             },
             especificacao: {
                 elementType: 'input',
+                label: 'specification',
                 elementConfig: {
                     type: 'text',
                     placeholder: 'Especificação Produto'
@@ -67,6 +71,7 @@ class Cadastro extends Component {
             },
             codigo: {
                 elementType: 'input',
+                label: 'codrefproduct',
                 elementConfig: {
                     type: 'text',
                     placeholder: 'Código Produto'
@@ -78,6 +83,7 @@ class Cadastro extends Component {
             },
             tipodepacote: {
                 elementType: 'input',
+                label: 'packingtype',
                 elementConfig: {
                     type: 'text',
                     placeholder: 'Tipo de Embalagem'
@@ -91,6 +97,7 @@ class Cadastro extends Component {
             },
             quantidadepacote: {
                 elementType: 'input',
+                label: 'qtdpacking',
                 elementConfig: {
                     type: 'text',
                     placeholder: 'Quantidade Embalagem'
@@ -104,6 +111,7 @@ class Cadastro extends Component {
             },
             descricao: {
                 elementType: 'textarea',
+                label: 'descrition',
                 elementConfig: {
                     type: 'textarea',
                     placeholder: 'Descrição'
@@ -117,6 +125,7 @@ class Cadastro extends Component {
             },
             observação: {
                 elementType: 'textarea',
+                label: 'observation',
                 elementConfig: {
                     type: 'textarea',
                     placeholder: 'Observação'
@@ -133,7 +142,7 @@ class Cadastro extends Component {
     }
 
     componentWillReceiveProps() {
-        console.log(this.props);
+        // console.log(this.props);
         const updateFormItem = {
             ...this.state.cadastroForm
         }
@@ -157,9 +166,21 @@ class Cadastro extends Component {
                 this.setState({
                     imagem: res.data.imagem
                 });
-                let temp = Object.entries(res.data);
-                temp.shift();
-                this.setState({formInputValue: temp});
+                const temp = {
+                    name: res.data.name,
+                    brand: res.data.brand,
+                    model: res.data.model,
+                    specification: res.data.specification,
+                    codrefproduct: res.data.codrefproduct,
+                    packingtype: res.data.packingtype,
+                    qtdpacking: res.data.qtdpacking,
+                    descrition: res.data.descrition,
+                    observation: 'res.data.observation'
+                }
+                let propTemp  = Object.entries(temp);
+                // console.log(propTemp, res.data);
+                //propTemp.shift();
+                this.setState({formInputValue: propTemp});
             });
         }
     }
@@ -173,15 +194,18 @@ class Cadastro extends Component {
         if (this.state.formInputValue) {
             const arr = [];
             for (let key in this.state.cadastroForm) {
+                // console.log(this.state.cadastroForm[key]);
                 arr.push({
                     id: key,
                     config: this.state.cadastroForm[key]
                 });
             }
             arr.map((cadForm, index) => {
-                // console.log(index, this.state.formInputValue, cadForm.config);
-                cadForm.config.value = this.state.formInputValue[index][1]
-                cadForm.config.valid = true;
+                //console.log(index, cadForm.config.label, this.state.formInputValue[index][1]);
+                if (this.state.formInputValue[index][1]) {
+                    cadForm.config.value = this.state.formInputValue[index][1]
+                    cadForm.config.valid = true;
+                }
             });
             // Agora a gambi foi arrumada, o estado esta sendo atualizado no update do componente
             // Mas o bom mesmo seria usar redux para poder controlar o estado do componente de uma forma
@@ -247,10 +271,10 @@ class Cadastro extends Component {
         this.setState({loading: true});
         const {fileUpload} = this.state;
         const id = this.props.location.hash.slice(1);
-        console.log(this.state.image)
+        // console.log(this.state.image)
         if (fileUpload) {
             this.uploadImagem(fileUpload, fileUpload.name, res => {
-                console.log(res);
+                // console.log(res);
                 this.middleCadastraItem(res.data.name, id)
             });
         } else {
@@ -268,7 +292,7 @@ class Cadastro extends Component {
     }
 
     inputChangeItem = (event, inputItem) => {
-         console.log(inputItem, event.target.value);
+        // console.log(inputItem, event.target.value);
         const updateFormItem = {
             ...this.state.cadastroForm
         }
