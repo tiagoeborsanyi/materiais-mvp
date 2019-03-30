@@ -25,9 +25,9 @@ class Dashboard extends Component {
   }
 
   fetchItens = () => {
-    const { count, start } = this.state;
-    this.setState({start: count + this.state.start});
-    axios.get(`/api/item?start=${start}&count=${count}`)
+    const { count } = this.state;
+    this.setState({start: this.state.start + count});
+    axios.get(`/api/item?start=${this.state.start}&count=${count}`)
       .then(res => {
         this.setState({dash: this.state.dash.concat(res.data)});
       })
