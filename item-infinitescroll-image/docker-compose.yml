@@ -6,8 +6,8 @@ services:
     image: api/tiagoeborsanyi
     container_name: app
     ports:
-      - "5000:5000"
-      # - "443:443"
+      - "80:5000"
+      - "443:443"
     restart: always
     volumes:
       - certbot-webroot-evsoul:/public/.well-know
