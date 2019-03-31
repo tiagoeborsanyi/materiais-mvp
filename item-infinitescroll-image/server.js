@@ -1,4 +1,5 @@
 const express = require('express');
+const forceSSL = require('express-force-ssl');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
@@ -30,6 +31,7 @@ app.use(fileUpload());
 // body parser middlaeware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(forceSSL);
 
 // DB config
 const db = require('./config/keys').mongoURI;
