@@ -6,7 +6,7 @@ ENV DEBUG="server:*"
 RUN apt-get update -y \
     && apt-get -y install curl python build-essential git ca-certificates
 
-# RUN mkdir -p 
+# RUN mkdir -p /public 
 
 COPY . /
 

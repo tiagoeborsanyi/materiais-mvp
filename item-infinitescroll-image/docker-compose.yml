@@ -9,3 +9,19 @@ services:
       - "5000:5000"
       # - "443:443"
     restart: always
+    volumes:
+      - certbot-webroot-evsoul:/public/.well-know
+      - certbot-letsencrypt:/etc/letsencrypt
+  
+  certbot:
+    build: ./certbot
+    image: certbot/tiagoemerick
+    container_name: certbot
+    restart: always
+    volumes:
+      - certbot-webroot-evsoul:/webroots/tiagoemerick.com/.well-know
+      - certbot-letsencrypt:/etc/letsencrypt
+    
+volumes:
+  certbot-webroot-evsoul:
+  certbot-letsencrypt:
