@@ -12,6 +12,8 @@ require('dotenv').config();
 
 app.use('*', cors());
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 // default options
 app.use(fileUpload());
 
