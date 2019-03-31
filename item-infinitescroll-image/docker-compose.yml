@@ -6,11 +6,11 @@ services:
     image: api/tiagoeborsanyi
     container_name: app
     ports:
-      - "80:5000"
-      - "443:443"
+      - "5000:5000"
+      # - "443:443"
     restart: always
     volumes:
-      - certbot-webroot-evsoul:/public/.well-know
+      - certbot-webroot-tiagoemerick:/public/.well-know
       - certbot-letsencrypt:/etc/letsencrypt
   
   certbot:
@@ -19,9 +19,9 @@ services:
     container_name: certbot
     restart: always
     volumes:
-      - certbot-webroot-evsoul:/webroots/tiagoemerick.com/.well-know
+      - certbot-webroot-tiagoemerick:/webroots/tiagoemerick.com/.well-know
       - certbot-letsencrypt:/etc/letsencrypt
     
 volumes:
-  certbot-webroot-evsoul:
+  certbot-webroot-tiagoemerick:
   certbot-letsencrypt:
