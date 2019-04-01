@@ -24,9 +24,6 @@ const options = {
 app.use('*', cors());
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname+'public/index.html'));
-});
 
 // default options
 app.use(fileUpload());
@@ -35,6 +32,9 @@ app.use(fileUpload());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(forceSSL);
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname+'public/index.html'));
+});
 
 // DB config
 const db = require('./config/keys').mongoURI;
